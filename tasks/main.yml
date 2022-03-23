@@ -1,0 +1,13 @@
+---
+- name: create temp dir
+  ansible.builtin.tempfile:
+    state: directory
+  register: tmp_app_dir
+
+- include_tasks: app.yml
+  with_items: "{{ splunkbase_apps }}"
+
+- name: remove temp dir
+  ansible.builtin.file:
+    path: "{{ tmp_app_dir.path }}"
+    state: absent

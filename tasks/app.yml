@@ -1,0 +1,28 @@
+---
+- name: download app from splunkbase
+  splunkbase:
+    app: "{{ item }}"
+    dest: "{{ tmp_app_dir.path }}"
+    username: "{{ splunkbase_user }}"
+    password: "{{ splunkbase_password }}"
+    owner: "{{ splunk_user }}"
+    group: "{{ splunk_group }}"
+  become: true
+  register: app_package
+
+- name: unpack app
+  ansible.builtin.unarchive:
+    src: "{{ app_package.dest }}"
+    dest: "{{ splunk_home }}/etc/apps/"
+    remote_src: yes
+  register: app_folder
+  become: true
+
+- name: set permissions
+  file:
+    state: directory
+    path: "{{ app_folder.dest }}"
+    owner: "{{ splunk_user }}"
+    group: "{{ splunk_group }}"
+    recurse: true
+  become: true

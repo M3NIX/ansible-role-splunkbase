@@ -1,0 +1,6 @@
+---
+splunk_home: "/opt/splunk/"
+splunk_user: splunk
+splunk_group: splunk
+# splunkbase_user: myuser
+# splunkbase_password: secret password
