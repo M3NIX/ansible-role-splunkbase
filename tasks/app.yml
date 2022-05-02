@@ -1,6 +1,6 @@
 ---
 - name: download app from splunkbase
-  splunkbase:
+  get_splunk_app:
     app: "{{ item }}"
     dest: "{{ tmp_app_dir.path }}"
     username: "{{ splunkbase_user }}"
