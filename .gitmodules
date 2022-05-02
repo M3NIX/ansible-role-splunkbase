@@ -1,0 +1,3 @@
+[submodule "library"]
+	path = library
+	url = https://github.com/M3NIX/ansible-module-splunkbase.git
